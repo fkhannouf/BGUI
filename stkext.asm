@@ -49,6 +49,7 @@
 ; Initial revision.
 ;
 ;
+         INCLUDE 'exec/funcdef.i'
         INCLUDE 'exec/exec_lib.i'
         INCLUDE 'exec/tasks.i'
         INCLUDE 'exec/memory.i'

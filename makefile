@@ -572,7 +572,7 @@ t:build_developers_archive: update_revision debug_build doc html_documentation a
    @echo Copying include files...
    @makedir t:bgui/include
    @makedir t:bgui/include/libraries
-   @copy include/libraries_bgui.h to t:bgui/include/libraries/bgui.h
+   @copy include/libraries/bgui.h to t:bgui/include/libraries/bgui.h
    @copy icons/def_h.info to t:bgui/include/libraries/bgui.h.info
    @makedir t:bgui/include/bgui
    @copy include/bgui.h to t:bgui/include/bgui/bgui.h
@@ -587,21 +587,21 @@ t:build_developers_archive: update_revision debug_build doc html_documentation a
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_cx.h.info
    @copy include/bgui_obsolete.h to t:bgui/include/bgui/bgui_obsolete.h
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_obsolete.h.info
-   @copy include/libraries_bgui_macros.h to t:bgui/include/libraries/bgui_macros.h
+   @copy include/libraries/bgui_macros.h to t:bgui/include/libraries/bgui_macros.h
    @copy icons/def_h.info to t:bgui/include/libraries/bgui_macros.h.info
    @copy include/bgui_macros.h to t:bgui/include/bgui/bgui_macros.h
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_macros.h.info
    @copy gadgets/TreeView/include/TreeViewClass.h to t:bgui/include/bgui/bgui_treeview.h
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_treeview.h.info
-   @copy include/libraries_bgui_treeview.h to t:bgui/include/libraries/bgui_treeview.h
+   @copy include/libraries/bgui_treeview.h to t:bgui/include/libraries/bgui_treeview.h
    @copy icons/def_h.info to t:bgui/include/libraries/bgui_treeview.h.info
    @copy gadgets/Bar/include/BarClass.h to t:bgui/include/bgui/bgui_bar.h
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_bar.h.info
-   @copy include/libraries_bgui_bar.h to t:bgui/include/libraries/bgui_bar.h
+   @copy include/libraries/bgui_bar.h to t:bgui/include/libraries/bgui_bar.h
    @copy icons/def_h.info to t:bgui/include/libraries/bgui_bar.h.info
    @copy gadgets/LayoutGroup/include/LayoutGroupClass.h to t:bgui/include/bgui/bgui_layoutgroup.h
    @copy icons/def_h.info to t:bgui/include/bgui/bgui_layoutgroup.h.info
-   @copy include/libraries_bgui_layoutgroup.h to t:bgui/include/libraries/bgui_layoutgroup.h
+   @copy include/libraries/bgui_layoutgroup.h to t:bgui/include/libraries/bgui_layoutgroup.h
    @copy icons/def_h.info to t:bgui/include/libraries/bgui_layoutgroup.h.info
    @makedir t:bgui/include/proto
    @copy include/bgui_proto.h to t:bgui/include/proto/bgui.h
@@ -992,7 +992,7 @@ o/class-protos.h: $(proto_src) bin/MakeProto
 $(PRAGMA_DIRECTORY) $(INLINE_DIRECTORY) $(FD_DIRECTORY):
    makedir $@
 
-include:libraries/bgui.h:             include/libraries_bgui.h
+include:libraries/bgui.h:             include/libraries/bgui.h
 include:bgui/bgui.h:                  include/bgui.h
 include:bgui/bgui_image.h:            include/bgui_image.h
 include:bgui/bgui_asl.h:              include/bgui_asl.h
@@ -1000,13 +1000,13 @@ include:bgui/bgui_arexx.h:            include/bgui_arexx.h
 include:bgui/bgui_cx.h:               include/bgui_cx.h
 include:bgui/bgui_obsolete.h:         include/bgui_obsolete.h
 include:bgui/bgui_prefs.h:            include/bgui_prefs.h
-include:libraries/bgui_macros.h:      include/libraries_bgui_macros.h
+include:libraries/bgui_macros.h:      include/libraries/bgui_macros.h
 include:bgui/bgui_macros.h:           include/bgui_macros.h
-include:libraries/bgui_treeview.h:    include/libraries_bgui_treeview.h
+include:libraries/bgui_treeview.h:    include/libraries/bgui_treeview.h
 include:bgui/bgui_treeview.h:         gadgets/TreeView/include/TreeViewClass.h
-include:libraries/bgui_bar.h:         include/libraries_bgui_bar.h
+include:libraries/bgui_bar.h:         include/libraries/bgui_bar.h
 include:bgui/bgui_bar.h:              gadgets/Bar/include/BarClass.h
-include:libraries/bgui_layoutgroup.h: include/libraries_bgui_layoutgroup.h
+include:libraries/bgui_layoutgroup.h: include/libraries/bgui_layoutgroup.h
 include:bgui/bgui_layoutgroup.h:      gadgets/LayoutGroup/include/LayoutGroupClass.h
 include:proto/bgui.h:                 include/bgui_proto.h
 include:clib/bgui_protos.h:           include/bgui_protos.h

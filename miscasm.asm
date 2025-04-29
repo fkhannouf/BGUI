@@ -56,14 +56,19 @@ call     MACRO
          jsr _LVO\1(a6)
          ENDM
 
+         include  "exec/funcdef.i"
          include  "exec/exec_lib.i"
          include  "include:utility/hooks.i"
-         include  "include:utility/utility_lib.i"
+         include  "include:libraries/amigaguide_lib.i"
+         include  "include:libraries/utility_lib.i"
+         include  "include:libraries/graphics_lib.i"
+         include  "include:libraries/intuition_lib.i"
+         include  "include:utility/utility.i"
          include  "include:intuition/classes.i"
          include  "include:intuition/cghooks.i"
-         include  "include:intuition/intuition_lib.i"
-         include  "include:graphics/graphics_lib.i"
-         include  "include:libraries/amigaguide_lib.i"
+         include  "include:intuition/intuition.i"
+         include  "include:graphics/gfx.i"
+         include  "include:libraries/amigaguide.i"
 
 ;makeproto __stdargs BOOL DisplayAGuideInfo(struct NewAmigaGuide *, Tag, ...);
 
