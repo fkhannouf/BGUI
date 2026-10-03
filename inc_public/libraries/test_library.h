@@ -1,10 +1,3 @@
-
-/*
-** SPDX-License-Identifier: Unlicense
-** Written 2025 by Rene W. Olsen
-** Target OS: AmigaOS4
-*/
-
 // --
 
 #ifndef LIBRARIES_TEST_LIBRARY_H
