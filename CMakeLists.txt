@@ -8,25 +8,31 @@ set(CMAKE_C_EXTENSIONS OFF)
 
 set(BGUI_TARGET test_library)
 
+set(BGUI_LOG_LEVEL "3" CACHE STRING "Maximum log level: 0=none, 1=error, 2=info, 3=debug")
+set_property(CACHE BGUI_LOG_LEVEL PROPERTY STRINGS 0 1 2 3)
+if(NOT BGUI_LOG_LEVEL MATCHES "^[0-3]$")
+    message(FATAL_ERROR "BGUI_LOG_LEVEL must be 0 (none), 1 (error), 2 (info), or 3 (debug)")
+endif()
+
 file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 set(BGUI_SOURCES
-    src/_man_Obtain.c
-    src/_man_Release.c
-    src/_man_Open.c
-    src/_man_Close.c
-    src/_man_Expunge.c
-    src/_man_Init.c
-    src/_main_Obtain.c
-    src/_main_Release.c
-    src/_main_Expunge.c
-    src/_main_Clone.c
-    src/_main_FuncAdd.c
-    src/Resources.c
-    src/Resources_Init.c
-    src/Resources_Free.c
-    src/Debug.c
-    src/Library.c
+        sources/_man_Obtain.c
+        sources/_man_Release.c
+        sources/_man_Open.c
+        sources/_man_Close.c
+        sources/_man_Expunge.c
+        sources/_man_Init.c
+        sources/_main_Obtain.c
+        sources/_main_Release.c
+        sources/_main_Expunge.c
+        sources/_main_Clone.c
+        sources/_main_FuncAdd.c
+        sources/Resources.c
+        sources/Resources_Init.c
+        sources/Resources_Free.c
+        sources/Debug.c
+        sources/Library.c
 )
 
 add_library(${BGUI_TARGET} SHARED ${BGUI_SOURCES})
@@ -50,17 +56,15 @@ target_include_directories(${BGUI_TARGET}
         PRIVATE
 #        "src/includes"
 #        "src/includes/public"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/includes"
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/includes/public"
+        "${CMAKE_CURRENT_SOURCE_DIR}/sources"
+        "${CMAKE_CURRENT_SOURCE_DIR}/sources/includes"
+        "${CMAKE_CURRENT_SOURCE_DIR}/sources/includes/public"
 )
 
 target_compile_definitions(${BGUI_TARGET}
         PRIVATE
         __USE_INLINE__
-        DO_ERROR
-        DO_INFO
-        DO_DEBUG
+        BGUI_LOG_LEVEL=${BGUI_LOG_LEVEL}
 )
 
 target_compile_options(${BGUI_TARGET}
@@ -83,8 +87,8 @@ if(BGUI_BUILD_TESTS)
     add_executable(test_lib_test test/test_lib.c)
     target_include_directories(test_lib_test
         PRIVATE
-            "src/includes"
-            "src/includes/public"
+            "sources/includes"
+            "sources/includes/public"
     )
     target_link_libraries(test_lib_test PRIVATE ${BGUI_TARGET})
 
