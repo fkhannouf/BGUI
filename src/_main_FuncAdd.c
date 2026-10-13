@@ -1,18 +1,14 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
-
-U32 _main_FuncAdd( struct Test_LibraryIFace *Self, U32 a, U32 b )
+uint32 _main_FuncAdd( struct Test_LibraryIFace *Self, uint32 a, uint32 b )
 {
 // struct LibBase *libBase;
 struct LibData *data;
-U32 retval;
-U32 c;
+uint32 retval;
+uint32 c;
 
-//	libBase = (PTR) Self->Data.LibBase;
-	data = (PTR) ( (U32) Self - Self->Data.NegativeSize );
+//	libBase = (APTR) Self->Data.LibBase;
+	data = (APTR) ( (uint32) Self - Self->Data.NegativeSize );
 
 	MYDEBUG( "Libray : _main_FuncAdd" );
 

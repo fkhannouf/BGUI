@@ -1,11 +1,4 @@
-// --
-
-#ifndef INC_PRIVATE_ALL_H
-#error Include "inc_private/All.h" first
-#endif
-
-#ifndef INC_PRIVATE_DEBUG_H
-#define INC_PRIVATE_DEBUG_H
+#pragma once
 
 // ---
 // Note:
@@ -19,7 +12,7 @@
 
 #if defined( DO_ERROR ) || defined( DO_INFO ) || defined( DO_DEBUG )
 
-void VARARGS68K _MYDEBUG( U32 lvl, STR fmt, ... );
+void VARARGS68K _MYDEBUG( uint32 lvl, STRPTR fmt, ... );
 
 #ifdef DO_ERROR
 #define MYERROR( fmt, ... )	_MYDEBUG( 2, fmt, ##__VA_ARGS__ )
@@ -47,6 +40,3 @@ void VARARGS68K _MYDEBUG( U32 lvl, STR fmt, ... );
 
 #endif
 
-// --
-
-#endif

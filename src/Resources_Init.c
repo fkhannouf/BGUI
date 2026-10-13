@@ -1,12 +1,8 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
-
-S32 Resources_Init( struct LibBase *libBase UNUSED )
+int32 Resources_Init( struct LibBase *libBase UNUSED )
 {
-S32 retval;
+int32 retval;
 
 	MYDEBUG( "Library : Resources_Init" );
 

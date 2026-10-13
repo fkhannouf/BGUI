@@ -1,19 +1,15 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
-
-PTR _main_Clone( struct Test_LibraryIFace *Self )
+APTR _main_Clone( struct Test_LibraryIFace *Self )
 {
 //struct LibBase *libBase;
 struct Interface *IFace;
 struct LibData *data;
-S32 error;
+int32 error;
 
 	MYDEBUG( "Library : _main_Clone" );
 
-//	libBase = (PTR) Self->Data.LibBase;
+//	libBase = (APTR) Self->Data.LibBase;
 	error = TRUE;
 
 	extern const struct TagItem _main_Tags[];
@@ -27,7 +23,7 @@ S32 error;
 
 	IFace->Data.Flags |= IFLF_CLONED;
 
-	data = (PTR) ( (U32) IFace - IFace->Data.NegativeSize );
+	data = (APTR) ( (uint32) IFace - IFace->Data.NegativeSize );
 
 	memset( data, 0, sizeof( struct LibData ));
 
@@ -42,7 +38,7 @@ bailout:
 
 	if (( IFace ) && ( error ))
 	{
-		_main_Expunge( (PTR) IFace );
+		_main_Expunge( (APTR) IFace );
 		IFace = NULL;
 	}
 

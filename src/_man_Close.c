@@ -1,19 +1,19 @@
 // --
 
-#include "inc_private/All.h"
+#include "includes/private/common.h"
 
 // --
 
-PTR _manager_Close( struct LibraryManagerInterface *Self )
+APTR _manager_Close( struct LibraryManagerInterface *Self )
 {
 struct LibBase *libBase;
-PTR seglist;
+APTR seglist;
 
 	MYDEBUG( "Library : _manager_Close" );
 
 	seglist = NULL;
 
-	libBase = (PTR) Self->Data.LibBase;
+	libBase = (APTR) Self->Data.LibBase;
 
 	// Update Library open count
 	if ( libBase->lib_Base.lib_OpenCnt )
