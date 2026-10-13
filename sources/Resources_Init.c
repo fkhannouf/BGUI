@@ -4,7 +4,7 @@ int32 Resources_Init( struct LibBase *libBase UNUSED )
 {
 int32 retval;
 
-	MYDEBUG( "Library : Resources_Init" );
+	__DEBUG( "Library : Resources_Init" );
 
 	retval = FALSE;
 
@@ -13,7 +13,7 @@ int32 retval;
 	//
 	if ( ! myOpenResources( INT_MAX ))
 	{
-		MYERROR( "Library : myOpenResources() failed" );
+		__ERROR( "Library : myOpenResources() failed" );
 		goto bailout;
 	}
 

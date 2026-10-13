@@ -128,7 +128,7 @@ int32 retval;
 int32 pos;
 APTR ptr;
 
-	MYERROR( "Library : myOpenResources" );
+	__ERROR( "Library : myOpenResources" );
 
 	retval = FALSE;
 
@@ -147,7 +147,7 @@ APTR ptr;
 
 				if ( ! base )
 				{
-					MYERROR( "Library : Error missing base pointer" );
+					__ERROR( "Library : Error missing base pointer" );
 					goto bailout;
 				}
 
@@ -156,13 +156,13 @@ APTR ptr;
 					STRPTR name = OpenList[pos].OS_LIB_NAME;
 					uint32 vers = OpenList[pos].OS_LIB_VERS;
 
-					MYINFO( "Library : Opening library '%s' v%lu", name, vers );
+					__INFO( "Library : Opening library '%s' v%lu", name, vers );
 
-					ptr = OpenLibrary( name, vers );
+					ptr = IExec->OpenLibrary( name, vers );
 
 					if ( ! ptr )
 					{
-						MYERROR( "Library : Error opening library '%s' v%lu", name, vers );
+						__ERROR( "Library : Error opening library '%s' v%lu", name, vers );
 						goto bailout;
 					}
 
@@ -177,7 +177,7 @@ APTR ptr;
 
 				if ( ! ifc )
 				{
-					MYERROR( "Library : Error missing interface pointer" );
+					__ERROR( "Library : Error missing interface pointer" );
 					goto bailout;
 				}
 
@@ -187,13 +187,13 @@ APTR ptr;
 					STRPTR name = OpenList[pos].OS_IFC_NAME;
 					uint32 vers = OpenList[pos].OS_IFC_VERS;
 
-					MYINFO( "Library : Getting interface pos #%lu", pos );
+					__INFO( "Library : Getting interface pos #%lu", pos );
 
-					ptr = GetInterface( *base, name, vers, NULL );
+					ptr = IExec->GetInterface( *base, name, vers, NULL );
 
 					if ( ! ptr )
 					{
-						MYERROR( "Library : Error getting interface pos #%lu", pos );
+						__ERROR( "Library : Error getting interface pos #%lu", pos );
 						goto bailout;
 					}
 
@@ -208,7 +208,7 @@ APTR ptr;
 
 				if ( ! base )
 				{
-					MYERROR( "Library : Error missing class pointer" );
+					__ERROR( "Library : Error missing class pointer" );
 					goto bailout;
 				}
 
@@ -217,7 +217,7 @@ APTR ptr;
 					// Make sure you have opened Intuition first
 					if ( ! IIntuition )
 					{
-						MYERROR( "Library : Error need Intuition" );
+						__ERROR( "Library : Error need Intuition" );
 						goto bailout;
 					}
 
@@ -225,13 +225,13 @@ APTR ptr;
 					STRPTR name = OpenList[pos].OS_CLS_NAME;
 					uint32 vers = OpenList[pos].OS_CLS_VERS;
 
-					MYINFO( "Library : Opening class '%s'", name );
+					__INFO( "Library : Opening class '%s'", name );
 
-					ptr = OpenClass( name, vers, cls );
+					ptr = IIntuition->OpenClass( name, vers, cls );
 
 					if ( ! ptr )
 					{
-						MYERROR( "Library : Error opening class '%s' pos #%lu", name, pos );
+						__ERROR( "Library : Error opening class '%s' pos #%lu", name, pos );
 						goto bailout;
 					}
 
@@ -242,7 +242,7 @@ APTR ptr;
 
 			default:
 			{
-				MYERROR( "Library : Unknown Resource type (%lu)", OpenList[pos].os_Type );
+				__ERROR( "Library : Unknown Resource type (%lu)", OpenList[pos].os_Type );
 				goto bailout;
 			}
 		}
@@ -261,7 +261,7 @@ void myCloseResources( void )
 {
 int32 pos;
 
-	MYERROR( "Library : myCloseResources" );
+	__ERROR( "Library : myCloseResources" );
 
 	// -- Find End of List
 	for( pos=0 ; TRUE ; pos++ )
@@ -278,7 +278,7 @@ int32 pos;
 	while( pos > 2 )
 	{
 		pos--;
-		MYERROR( "Library : Processing : %s", OpenList[pos].os_STR );
+		__ERROR( "Library : Processing : %s", OpenList[pos].os_STR );
 
 		switch( OpenList[pos].os_Type )
 		{
@@ -288,7 +288,7 @@ int32 pos;
 
 				if ( *base )
 				{
-					CloseLibrary( *base );
+					IExec->CloseLibrary( *base );
 					*base = NULL;
 				}
 				break;
@@ -300,7 +300,7 @@ int32 pos;
 
 				if ( *ifc )
 				{
-					DropInterface( *ifc );
+					IExec->DropInterface( *ifc );
 					*ifc = NULL;
 				}
 				break;
@@ -313,7 +313,7 @@ int32 pos;
 
 				if ( *base )
 				{
-					CloseClass( (APTR) *base );
+					IIntuition->CloseClass( (APTR) *base );
 					*base = NULL;
 					*cls = NULL;
 				}
@@ -322,7 +322,7 @@ int32 pos;
 
 			default:
 			{
-				MYERROR( "Unknown Resource type (%ld)", OpenList[pos].os_Type );
+				__ERROR( "Unknown Resource type (%ld)", OpenList[pos].os_Type );
 				break;
 			}
 		}

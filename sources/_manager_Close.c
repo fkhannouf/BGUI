@@ -9,7 +9,7 @@ APTR _manager_Close( struct LibraryManagerInterface *Self )
 struct LibBase *libBase;
 APTR seglist;
 
-	MYDEBUG( "Library : _manager_Close" );
+	__DEBUG( "Library : _manager_Close" );
 
 	seglist = NULL;
 

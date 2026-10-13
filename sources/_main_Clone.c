@@ -7,17 +7,17 @@ struct Interface *IFace;
 struct LibData *data;
 int32 error;
 
-	MYDEBUG( "Library : _main_Clone" );
+	__DEBUG( "Library : _main_Clone" );
 
 //	libBase = (APTR) Self->Data.LibBase;
 	error = TRUE;
 
 	extern const struct TagItem _main_Tags[];
-	IFace = MakeInterface( Self->Data.LibBase, _main_Tags );
+	IFace = IExec->MakeInterface( Self->Data.LibBase, _main_Tags );
 
 	if ( ! IFace )
 	{
-		MYERROR( "Library : Error allocating memory" );
+		__ERROR( "Library : Error allocating memory" );
 		goto bailout;
 	}
 

@@ -10,7 +10,7 @@ uint32 c;
 //	libBase = (APTR) Self->Data.LibBase;
 	data = (APTR) ( (uint32) Self - Self->Data.NegativeSize );
 
-	MYDEBUG( "Libray : _main_FuncAdd" );
+	__DEBUG( "Libray : _main_FuncAdd" );
 
 	c = data->LastVal;
 

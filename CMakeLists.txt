@@ -17,12 +17,12 @@ endif()
 file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
 
 set(BGUI_SOURCES
-        sources/_man_Obtain.c
-        sources/_man_Release.c
-        sources/_man_Open.c
-        sources/_man_Close.c
-        sources/_man_Expunge.c
-        sources/_man_Init.c
+        sources/_manager_Obtain.c
+        sources/_manager_Release.c
+        sources/_manager_Open.c
+        sources/_manager_Close.c
+        sources/_manager_Expunge.c
+        sources/_manager_Init.c
         sources/_main_Obtain.c
         sources/_main_Release.c
         sources/_main_Expunge.c
@@ -63,7 +63,7 @@ target_include_directories(${BGUI_TARGET}
 
 target_compile_definitions(${BGUI_TARGET}
         PRIVATE
-        __USE_INLINE__
+#        __USE_INLINE__
         BGUI_LOG_LEVEL=${BGUI_LOG_LEVEL}
 )
 

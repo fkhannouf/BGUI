@@ -2,7 +2,7 @@
 
 void Resources_Free( struct LibBase *libBase UNUSED )
 {
-	MYDEBUG( "Library : Resources_Free" );
+	__DEBUG( "Library : Resources_Free" );
 
 	// --
 	// Free Resources last

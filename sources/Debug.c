@@ -4,27 +4,34 @@
 
 // --
 
-#if defined( DO_ERROR ) || defined( DO_INFO ) || defined( DO_DEBUG )
+#if BGUI_LOG_LEVEL > BGUI_LOG_LEVEL_NONE
 
 static struct Task *__TASK = NULL;
 static struct UtilityIFace *__IU = NULL;
 
-void VARARGS68K _MYDEBUG( uint32 lvl UNUSED, STRPTR fmt, ... )
+void VARARGS68K _MYDEBUG( uint32 lvl, STRPTR fmt, ... )
 {
 struct UtilityIFace *IUtility;
 struct ExecIFace *IExec;
 struct Task *self;
 va_list ap;
 STRPTR buf;
+STRPTR level_name;
 
-	// lvl : 0 = Debug, 1 = Info, 2 = Error
+	switch ( lvl )
+	{
+		case BGUI_LOG_LEVEL_ERROR: level_name = (STRPTR) "ERROR"; break;
+		case BGUI_LOG_LEVEL_INFO:  level_name = (STRPTR) "INFO";  break;
+		case BGUI_LOG_LEVEL_DEBUG: level_name = (STRPTR) "DEBUG"; break;
+		default:                   level_name = (STRPTR) "LOG";   break;
+	}
 
 	IExec = (APTR)(*(struct ExecBase **)4)->MainInterface;
 
 	if ( ! __IU )
 	{
-		APTR base = OpenLibrary( "utility.library", 0 );
-		__IU = (APTR) GetInterface( base, "main", 1, NULL );
+		APTR base = IExec->OpenLibrary( "utility.library", 0 );
+		__IU = (APTR) IExec->GetInterface( base, "main", 1, NULL );
 	}
 
 	IUtility = __IU;
@@ -35,7 +42,7 @@ STRPTR buf;
 
 	if ( __IU )
 	{
-		buf = VASPrintf( fmt, va_getlinearva( ap, APTR ));
+		buf = IUtility->VASPrintf( fmt, va_getlinearva( ap, APTR ));
 	}
 	else
 	{
@@ -46,25 +53,26 @@ STRPTR buf;
 
 	// ---
 
-	Disable();
+	IExec->Disable();
 
-	self = FindTask(NULL);
+	self = IExec->FindTask(NULL);
 
-	DebugPrintF( "%s%p: %s\n",
+	IExec->DebugPrintF( "%s%p [%s]: %s\n",
 		( self != __TASK ) ? "--\n" : "", 
 		self,
+		level_name,
 		( buf ) ? buf : (STRPTR) fmt
 	);
 
 	__TASK = self;
 
-	Enable();
+	IExec->Enable();
 
 	// ---
 
 	if ( buf )
 	{
-		FreeVec( buf );
+		IExec->FreeVec( buf );
 	}
 
 	//-

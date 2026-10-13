@@ -1,5 +1,10 @@
 #pragma once
 
+#include <stdarg.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+
 #include <proto/dos.h>
 #include <proto/exec.h>
 #include <proto/intuition.h>
@@ -8,16 +13,12 @@
 #include <proto/utility.h>
 #include <exec/types.h>
 
-#include <stdarg.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdio.h>
+#include "../public/proto/test_library.h"
 
-#include "includes/public/proto/test_library.h"
+#include "../private/Version.h"
 
-#include "includes/private/Version.h"
+#include "../private/Debug.h"
+#include "../private/Library.h"
 
-#include "includes/private/Debug.h"
-#include "includes/private/Library.h"
-
-#include "includes/private/Protos.h"
+#include "../private/Protos.h"
+#include "../private/Debug.h"
