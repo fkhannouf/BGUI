@@ -18,7 +18,7 @@ APTR _manager_Init(struct LibBase* libBase, APTR SegList, struct ExecIFace* myIE
 	IExec = (APTR)myIExec;
 	SysBase = (APTR)myIExec->Data.LibBase;
 
-	MYDEBUG("Library : _manager_Init : libBase %p : SegList %p : myIExec %p : SysBase %p :", libBase, SegList, myIExec,
+	__DEBUG("Library : _manager_Init : libBase %p : SegList %p : myIExec %p : SysBase %p :", libBase, SegList, myIExec,
 	        SysBase);
 
 	libBase->lib_Base.lib_Node.ln_Type = NT_LIBRARY;
@@ -31,16 +31,16 @@ APTR _manager_Init(struct LibBase* libBase, APTR SegList, struct ExecIFace* myIE
 	libBase->lib_SegList = SegList;
 
 	if (Resources_Init(libBase)) {
-		MYDEBUG("Library : Opening Resources...  Success");
+		__DEBUG("Library : Opening Resources...  Success");
 
-		/* Set retun value */
+		/* Set return value */
 		retval = libBase;
 
 		/* Optional: small startup message */
-		DebugPrintF("Library : Rock'n Roll\n");
+		__DEBUG("Library : Rock'n Roll\n");
 	}
 	else {
-		MYERROR("Library : Opening Resources...  Failed");
+		__ERROR("Library : Opening Resources...  Failed");
 
 		Resources_Free(libBase);
 	}

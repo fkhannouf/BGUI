@@ -1,42 +1,36 @@
 #pragma once
 
-// ---
-// Note:
-//
-//  MYERROR( "Print Error Msg" );
-//  MYINFO(  "Print Into Msg %ld", -11 );
-//  MYDEBUG( "Library : Print Debug Msg %lu", +11 );
-//
-//  Change Makefile to Enable/Disable Error Types (and recompile)
-// 
+#define BGUI_LOG_LEVEL_NONE  0
+#define BGUI_LOG_LEVEL_ERROR 1
+#define BGUI_LOG_LEVEL_INFO  2
+#define BGUI_LOG_LEVEL_DEBUG 3
 
-#if defined( DO_ERROR ) || defined( DO_INFO ) || defined( DO_DEBUG )
-
-void VARARGS68K _MYDEBUG( uint32 lvl, STRPTR fmt, ... );
-
-#ifdef DO_ERROR
-#define MYERROR( fmt, ... )	_MYDEBUG( 2, fmt, ##__VA_ARGS__ )
-#else
-#define MYERROR( fmt, ... )	((void)0)
+#ifndef BGUI_LOG_LEVEL
+#define BGUI_LOG_LEVEL BGUI_LOG_LEVEL_NONE
 #endif
 
-#ifdef DO_INFO
-#define MYINFO( fmt, ... )		_MYDEBUG( 1, fmt, ##__VA_ARGS__ )
-#else
-#define MYINFO( fmt, ... )		((void)0)
+#if BGUI_LOG_LEVEL < BGUI_LOG_LEVEL_NONE || BGUI_LOG_LEVEL > BGUI_LOG_LEVEL_DEBUG
+#error "BGUI_LOG_LEVEL must be between 0 (none) and 3 (debug)"
 #endif
 
-#ifdef DO_DEBUG
-#define MYDEBUG( fmt, ... )	_MYDEBUG( 0, fmt, ##__VA_ARGS__ )
-#else
-#define MYDEBUG( fmt, ... )	((void)0)
+#if BGUI_LOG_LEVEL > BGUI_LOG_LEVEL_NONE
+void VARARGS68K ___DEBUG( uint32 lvl, STRPTR fmt, ... );
 #endif
 
+#if BGUI_LOG_LEVEL >= BGUI_LOG_LEVEL_ERROR
+#define __ERROR(...) ___DEBUG( BGUI_LOG_LEVEL_ERROR, __VA_ARGS__ )
 #else
-
- #define MYERROR( fmt, ... )	((void)0)
- #define MYINFO(  fmt, ... )	((void)0)
- #define MYDEBUG( fmt, ... )	((void)0)
-
+#define __ERROR(...) ((void)0)
 #endif
 
+#if BGUI_LOG_LEVEL >= BGUI_LOG_LEVEL_INFO
+#define __INFO(...) ___DEBUG( BGUI_LOG_LEVEL_INFO, __VA_ARGS__ )
+#else
+#define __INFO(...) ((void)0)
+#endif
+
+#if BGUI_LOG_LEVEL >= BGUI_LOG_LEVEL_DEBUG
+#define __DEBUG(...) ___DEBUG( BGUI_LOG_LEVEL_DEBUG, __VA_ARGS__ )
+#else
+#define __DEBUG(...) ((void)0)
+#endif

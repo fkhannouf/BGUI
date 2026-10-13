@@ -9,7 +9,7 @@ APTR _manager_Expunge( struct LibraryManagerInterface *Self )
 struct LibBase *libBase;
 APTR seglist;
 
-	MYDEBUG( "Library : _manager_Expunge" );
+	__DEBUG( "Library : _manager_Expunge" );
 
 	libBase = (APTR) Self->Data.LibBase;
 
@@ -19,9 +19,9 @@ APTR seglist;
 
 		Resources_Free( libBase );
 
-		Remove( (APTR) libBase );
+		IExec->Remove( (APTR) libBase );
 
-		DeleteLibrary( (APTR) libBase );
+		IExec->DeleteLibrary( (APTR) libBase );
 		libBase = NULL;
 	}
 	else
