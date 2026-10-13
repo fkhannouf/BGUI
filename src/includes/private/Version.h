@@ -1,13 +1,4 @@
-// --
-
-#ifndef INC_PRIVATE_ALL_H
-#error Include "inc_private/All.h" first
-#endif
-
-#ifndef INC_PRIVATE_VERSION_H
-#define INC_PRIVATE_VERSION_H
-
-// --
+#pragma once
 
 #define LIBPRI		0
 #define LIBNAME		"test_library.library"
@@ -17,7 +8,3 @@
 #define VERS		LIBNAME " 1.1"
 #define VSTRING		LIBNAME " 1.1 (" DATE ")\r\n"
 #define VERSTAG		"\0$VER: " LIBNAME " 1.1 (" DATE ")"
-
-// --
-
-#endif

@@ -47,14 +47,16 @@ set_target_properties(${BGUI_TARGET} PROPERTIES
 )
 
 target_include_directories(${BGUI_TARGET}
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc_private
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc_public
+        PRIVATE
+#        "src/includes"
+#        "src/includes/public"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/includes"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/includes/public"
 )
 
 target_compile_definitions(${BGUI_TARGET}
-    PRIVATE
+        PRIVATE
         __USE_INLINE__
         DO_ERROR
         DO_INFO
@@ -62,7 +64,7 @@ target_compile_definitions(${BGUI_TARGET}
 )
 
 target_compile_options(${BGUI_TARGET}
-    PRIVATE
+        PRIVATE
         -O2
         -Wall
         -W
@@ -70,7 +72,7 @@ target_compile_options(${BGUI_TARGET}
 )
 
 target_link_options(${BGUI_TARGET}
-    PRIVATE
+        PRIVATE
         -nostartfiles
         "-Wl,--cref,-M,-Map=${CMAKE_CURRENT_BINARY_DIR}/test_library.library.map"
 )
@@ -79,10 +81,10 @@ option(BGUI_BUILD_TESTS "Build the example test program" OFF)
 
 if(BGUI_BUILD_TESTS)
     add_executable(test_lib_test test/test_lib.c)
-    target_include_directories(test_lib_test PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc_private
-        ${CMAKE_CURRENT_SOURCE_DIR}/inc_public
+    target_include_directories(test_lib_test
+        PRIVATE
+            "src/includes"
+            "src/includes/public"
     )
     target_link_libraries(test_lib_test PRIVATE ${BGUI_TARGET})
 

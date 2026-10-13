@@ -1,10 +1,6 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
-
-U32 _main_Release( struct Test_LibraryIFace *Self )
+uint32 _main_Release( struct Test_LibraryIFace *Self )
 {
 	Self->Data.RefCount--;
 

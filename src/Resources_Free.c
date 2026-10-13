@@ -1,8 +1,4 @@
-// --
-
-#include "inc_private/All.h"
-
-// --
+#include "includes/private/common.h"
 
 void Resources_Free( struct LibBase *libBase UNUSED )
 {

@@ -1,8 +1,5 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
 // Global Pointers
 
 // struct Library *				ApplicationBase		= NULL;
@@ -61,10 +58,10 @@ enum OpenType
 struct OpenStruct
 {
 	enum OpenType		os_Type;
-	STR					os_STR;
-	U32					os_VAL;
-	PTR					os_PTR1;
-	PTR					os_PTR2;
+	STRPTR					os_STR;
+	uint32					os_VAL;
+	APTR					os_PTR1;
+	APTR					os_PTR2;
 };
 
 #define OS_LIB_NAME		os_STR
@@ -125,11 +122,11 @@ static struct OpenStruct OpenList[] =
 
 // --
 
-S32 myOpenResources( int max_libs )
+int32 myOpenResources( int max_libs )
 {
-S32 retval;
-S32 pos;
-PTR ptr;
+int32 retval;
+int32 pos;
+APTR ptr;
 
 	MYERROR( "Library : myOpenResources" );
 
@@ -146,7 +143,7 @@ PTR ptr;
 		{
 			case OT_Library:
 			{
-				PTR *base = OpenList[pos].OS_LIB_BASE;
+				APTR *base = OpenList[pos].OS_LIB_BASE;
 
 				if ( ! base )
 				{
@@ -156,8 +153,8 @@ PTR ptr;
 
 				if ( *base == NULL )
 				{
-					STR name = OpenList[pos].OS_LIB_NAME;
-					U32 vers = OpenList[pos].OS_LIB_VERS;
+					STRPTR name = OpenList[pos].OS_LIB_NAME;
+					uint32 vers = OpenList[pos].OS_LIB_VERS;
 
 					MYINFO( "Library : Opening library '%s' v%lu", name, vers );
 
@@ -176,7 +173,7 @@ PTR ptr;
 
 			case OT_Interface:
 			{
-				PTR *ifc = OpenList[pos].OS_IFC_IFC;
+				APTR *ifc = OpenList[pos].OS_IFC_IFC;
 
 				if ( ! ifc )
 				{
@@ -186,9 +183,9 @@ PTR ptr;
 
 				if ( *ifc == NULL )
 				{
-					PTR *base = OpenList[pos].OS_IFC_BASE;
-					STR name = OpenList[pos].OS_IFC_NAME;
-					U32 vers = OpenList[pos].OS_IFC_VERS;
+					APTR *base = OpenList[pos].OS_IFC_BASE;
+					STRPTR name = OpenList[pos].OS_IFC_NAME;
+					uint32 vers = OpenList[pos].OS_IFC_VERS;
 
 					MYINFO( "Library : Getting interface pos #%lu", pos );
 
@@ -207,7 +204,7 @@ PTR ptr;
 
 			case OT_Class:
 			{
-				PTR *base = OpenList[pos].OS_CLS_BASE;
+				APTR *base = OpenList[pos].OS_CLS_BASE;
 
 				if ( ! base )
 				{
@@ -225,8 +222,8 @@ PTR ptr;
 					}
 
 					struct IClass **cls = OpenList[pos].OS_CLS_CLS;
-					STR name = OpenList[pos].OS_CLS_NAME;
-					U32 vers = OpenList[pos].OS_CLS_VERS;
+					STRPTR name = OpenList[pos].OS_CLS_NAME;
+					uint32 vers = OpenList[pos].OS_CLS_VERS;
 
 					MYINFO( "Library : Opening class '%s'", name );
 
@@ -262,7 +259,7 @@ bailout:
 
 void myCloseResources( void )
 {
-S32 pos;
+int32 pos;
 
 	MYERROR( "Library : myCloseResources" );
 
@@ -287,7 +284,7 @@ S32 pos;
 		{
 			case OT_Library:
 			{
-				PTR *base = OpenList[pos].OS_LIB_BASE;
+				APTR *base = OpenList[pos].OS_LIB_BASE;
 
 				if ( *base )
 				{
@@ -299,7 +296,7 @@ S32 pos;
 
 			case OT_Interface:
 			{
-				PTR *ifc = OpenList[pos].OS_IFC_IFC;
+				APTR *ifc = OpenList[pos].OS_IFC_IFC;
 
 				if ( *ifc )
 				{
@@ -312,11 +309,11 @@ S32 pos;
 			case OT_Class:
 			{
 				struct IClass **cls = OpenList[pos].OS_CLS_CLS;
-				PTR *base = OpenList[pos].OS_CLS_BASE;
+				APTR *base = OpenList[pos].OS_CLS_BASE;
 
 				if ( *base )
 				{
-					CloseClass( (PTR) *base );
+					CloseClass( (APTR) *base );
 					*base = NULL;
 					*cls = NULL;
 				}

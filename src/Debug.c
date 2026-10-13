@@ -1,6 +1,6 @@
 // --
 
-#include "inc_private/All.h"
+#include "includes/private/common.h"
 
 // --
 
@@ -9,22 +9,22 @@
 static struct Task *__TASK = NULL;
 static struct UtilityIFace *__IU = NULL;
 
-void VARARGS68K _MYDEBUG( U32 lvl UNUSED, STR fmt, ... )
+void VARARGS68K _MYDEBUG( uint32 lvl UNUSED, STRPTR fmt, ... )
 {
 struct UtilityIFace *IUtility;
 struct ExecIFace *IExec;
 struct Task *self;
 va_list ap;
-STR buf;
+STRPTR buf;
 
 	// lvl : 0 = Debug, 1 = Info, 2 = Error
 
-	IExec = (PTR)(*(struct ExecBase **)4)->MainInterface;
+	IExec = (APTR)(*(struct ExecBase **)4)->MainInterface;
 
 	if ( ! __IU )
 	{
-		PTR base = OpenLibrary( "utility.library", 0 );
-		__IU = (PTR) GetInterface( base, "main", 1, NULL );
+		APTR base = OpenLibrary( "utility.library", 0 );
+		__IU = (APTR) GetInterface( base, "main", 1, NULL );
 	}
 
 	IUtility = __IU;
@@ -35,7 +35,7 @@ STR buf;
 
 	if ( __IU )
 	{
-		buf = VASPrintf( fmt, va_getlinearva( ap, PTR ));
+		buf = VASPrintf( fmt, va_getlinearva( ap, APTR ));
 	}
 	else
 	{
@@ -53,7 +53,7 @@ STR buf;
 	DebugPrintF( "%s%p: %s\n",
 		( self != __TASK ) ? "--\n" : "", 
 		self,
-		( buf ) ? buf : (STR) fmt
+		( buf ) ? buf : (STRPTR) fmt
 	);
 
 	__TASK = self;

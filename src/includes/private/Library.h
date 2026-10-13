@@ -1,19 +1,11 @@
-// --
+#pragma once
 
-#ifndef INC_PRIVATE_ALL_H
-#error Include "inc_private/All.h" first
-#endif
-
-#ifndef INC_PRIVATE_LIBRARY_H
-#define INC_PRIVATE_LIBRARY_H
-
-// --
 // Library Base .. is global data shared by all opening the library
 
 struct LibBase
 {
 	struct Library					lib_Base;
-	PTR								lib_SegList;
+	APTR								lib_SegList;
 };
 
 // --
@@ -22,9 +14,5 @@ struct LibBase
 
 struct LibData
 {
-	U32								LastVal;
+	uint32								LastVal;
 };
-
-// --
-
-#endif

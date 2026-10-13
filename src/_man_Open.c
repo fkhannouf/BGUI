@@ -1,20 +1,20 @@
 // --
 
-#include "inc_private/All.h"
+#include "includes/private/common.h"
 
 // --
 
-PTR _manager_Open( struct LibraryManagerInterface *Self, U32 version UNUSED )
+APTR _manager_Open( struct LibraryManagerInterface *Self, uint32 version UNUSED )
 {
 struct LibBase *libBase;
 
 	MYDEBUG( "Library : _manager_Open" );
 
-	libBase = (PTR) Self->Data.LibBase;
+	libBase = (APTR) Self->Data.LibBase;
 	libBase->lib_Base.lib_OpenCnt++;
 	libBase->lib_Base.lib_Flags &= ~LIBF_DELEXP;
 
-	return( (PTR) libBase );
+	return( (APTR) libBase );
 }
 
 // --

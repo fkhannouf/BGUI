@@ -1,20 +1,16 @@
-// --
+#include "includes/private/common.h"
 
-#include "inc_private/All.h"
-
-// --
-
-static const PTR _manager_Vectors[] =
+static const APTR _manager_Vectors[] =
 {
-	(PTR) _manager_Obtain,
-	(PTR) _manager_Release,
-	(PTR) NULL,
-	(PTR) NULL,
-	(PTR) _manager_Open,
-	(PTR) _manager_Close,
-	(PTR) _manager_Expunge,
-	(PTR) NULL,
-	(PTR) -1
+	(APTR) _manager_Obtain,
+	(APTR) _manager_Release,
+	(APTR) NULL,
+	(APTR) NULL,
+	(APTR) _manager_Open,
+	(APTR) _manager_Close,
+	(APTR) _manager_Expunge,
+	(APTR) NULL,
+	(APTR) -1
 };
 
 static const struct TagItem _manager_Tags[] =
@@ -27,14 +23,14 @@ static const struct TagItem _manager_Tags[] =
 
 // -- Main Interface
 
-static const PTR _main_Vectors[] =
+static const APTR _main_Vectors[] =
 {
-	(PTR) _main_Obtain,
-	(PTR) _main_Release,
-	(PTR) _main_Expunge,
-	(PTR) _main_Clone,
-	(PTR) _main_FuncAdd,
-	(PTR) -1
+	(APTR) _main_Obtain,
+	(APTR) _main_Release,
+	(APTR) _main_Expunge,
+	(APTR) _main_Clone,
+	(APTR) _main_FuncAdd,
+	(APTR) -1
 };
 
 // Note: if you don't need a unique ITest_Library for
@@ -53,11 +49,11 @@ const struct TagItem _main_Tags[] =
 
 // --
 
-static const PTR libInterfaces[] =
+static const APTR libInterfaces[] =
 {
-	(PTR) _manager_Tags,
-	(PTR) _main_Tags,
-	(PTR) NULL
+	(APTR) _manager_Tags,
+	(APTR) _main_Tags,
+	(APTR) NULL
 };
 
 // --
@@ -83,21 +79,21 @@ static const struct TagItem _manager_AutoInit[] =
 static USED const struct Resident lib_res =
 {
 /* rt_MatchWord	*/			RTC_MATCHWORD,
-/* rt_MatchTag	*/ (PTR)	( & lib_res + 0 ),
-/* rt_EndSkip	*/ (PTR)	( & lib_res + 1 ),
+/* rt_MatchTag	*/ (APTR)	( & lib_res + 0 ),
+/* rt_EndSkip	*/ (APTR)	( & lib_res + 1 ),
 /* rt_Flags		*/			RTF_NATIVE|RTF_COLDSTART|RTF_AUTOINIT,
 /* rt_Version	*/			VERSION,
 /* rt_Type		*/			NT_LIBRARY,
 /* rt_Pri		*/			LIBPRI,
-/* rt_Name		*/ (STR)	LIBNAME,
-/* rt_IdString	*/ (STR)	VSTRING,
-/* rt_Init		*/ (PTR)	_manager_AutoInit
+/* rt_Name		*/ (STRPTR)	LIBNAME,
+/* rt_IdString	*/ (STRPTR)	VSTRING,
+/* rt_Init		*/ (APTR)	_manager_AutoInit
 };
 
 // --
 // This is the entry point, if someone tries to run us from shell/wb
 
-S32 _start( STR argstring UNUSED, S32 arglen UNUSED, struct ExecBase *sysbase UNUSED )
+int32 _start( STRPTR argstring UNUSED, int32 arglen UNUSED, struct ExecBase *sysbase UNUSED )
 {
 	return( 0 );
 }

@@ -1,17 +1,17 @@
 // --
 
-#include "inc_private/All.h"
+#include "includes/private/common.h"
 
 // --
 
-PTR _manager_Expunge( struct LibraryManagerInterface *Self )
+APTR _manager_Expunge( struct LibraryManagerInterface *Self )
 {
 struct LibBase *libBase;
-PTR seglist;
+APTR seglist;
 
 	MYDEBUG( "Library : _manager_Expunge" );
 
-	libBase = (PTR) Self->Data.LibBase;
+	libBase = (APTR) Self->Data.LibBase;
 
 	if ( ! libBase->lib_Base.lib_OpenCnt )
 	{
@@ -19,9 +19,9 @@ PTR seglist;
 
 		Resources_Free( libBase );
 
-		Remove( (PTR) libBase );
+		Remove( (APTR) libBase );
 
-		DeleteLibrary( (PTR) libBase );
+		DeleteLibrary( (APTR) libBase );
 		libBase = NULL;
 	}
 	else

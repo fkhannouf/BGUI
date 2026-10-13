@@ -17,8 +17,8 @@ typedef uint8_t U8;
 typedef uint16_t U16;
 #endif
 
-#ifndef U32
-typedef uint32_t U32;
+#ifndef uint32
+typedef uint32_t uint32;
 #endif
 
 #ifndef U64
@@ -33,20 +33,20 @@ typedef int8_t S8;
 typedef int16_t S16;
 #endif
 
-#ifndef S32
-typedef int32_t S32;
+#ifndef int32
+typedef int32_t int32;
 #endif
 
 #ifndef S64
 typedef int64_t S64;
 #endif
 
-#ifndef PTR
-typedef void* PTR;
+#ifndef APTR
+typedef void* APTR;
 #endif
 
-#ifndef STR
-typedef char* STR;
+#ifndef STRPTR
+typedef char* STRPTR;
 #endif
 
 #ifndef MIN
